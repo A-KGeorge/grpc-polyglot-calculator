@@ -527,7 +527,7 @@ This project demonstrates:
 
 ## 🔮 Future Enhancements
 
-- **C# Service**: Add power operations (`**`) using .NET
+- **C# Service**: Add trignometric, logarthimic, and root operations (`sqrt`) using .NET and NuGet
 - **Kubernetes Deployment**: Production-ready orchestration
 
 ---
