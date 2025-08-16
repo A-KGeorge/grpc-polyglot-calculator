@@ -1,0 +1,22 @@
+syntax = "proto3";
+package calculator;
+
+option go_package = "./calculator";
+
+message TwoNumbers {
+  double a = 1;
+  double b = 2;
+}
+
+message Number {
+  double result = 1;
+}
+
+service Calculator {
+  rpc Add (TwoNumbers) returns (Number);
+  rpc Subtract (TwoNumbers) returns (Number);
+  rpc Multiply (TwoNumbers) returns (Number);
+  rpc Divide (TwoNumbers) returns (Number);
+  rpc Modulus (TwoNumbers) returns (Number);
+  rpc Exponentiate (TwoNumbers) returns (Number);
+}

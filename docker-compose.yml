@@ -1,0 +1,102 @@
+services:
+  # Python Add Server (port 50051)
+  python-add-server:
+    build:
+      context: .
+      dockerfile: ./python/Dockerfile
+    ports:
+      - "50051:50051"
+    networks:
+      - calculator-network
+    container_name: python-add-server
+
+  # Java Subtract Server (port 50052)
+  java-subtract-server:
+    build:
+      context: .
+      dockerfile: ./java/Dockerfile
+    ports:
+      - "50052:50052"
+    networks:
+      - calculator-network
+    container_name: java-subtract-server
+    depends_on:
+      - python-add-server
+
+  # C++ Multiply Server (port 50053)
+  cpp-multiply-server:
+    build:
+      context: .
+      dockerfile: ./cpp/Dockerfile
+    ports:
+      - "50053:50053"
+    networks:
+      - calculator-network
+    container_name: cpp-multiply-server
+    depends_on:
+      - java-subtract-server
+
+  # Rust Divide Server (port 50054)
+  rust-divide-server:
+    build:
+      context: .
+      dockerfile: ./rust/Dockerfile
+    ports:
+      - "50054:50054"
+    networks:
+      - calculator-network
+    container_name: rust-divide-server
+    depends_on:
+      - cpp-multiply-server
+
+  # Go Modulus Server
+  go-mod-server:
+    build:
+      context: .
+      dockerfile: ./go/Dockerfile
+    ports:
+      - "50055:50055"
+    networks:
+      - calculator-network
+    container_name: go-mod-server
+    depends_on:
+      - rust-divide-server
+
+  # Elixir Modulus Server
+  elixir-exponent-server:
+    build:
+      context: .
+      dockerfile: ./elixir/Dockerfile
+    ports:
+      - "50056:50056"
+    networks:
+      - calculator-network
+    container_name: elixir-exponent-server
+    depends_on:
+      - go-mod-server
+
+  # Node.js Client
+  node-client:
+    build:
+      context: .
+      dockerfile: ./node/Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - calculator-network
+    container_name: node-client
+    stdin_open: true
+    tty: true
+    depends_on:
+      - python-add-server
+      - java-subtract-server
+      - cpp-multiply-server
+      - rust-divide-server
+      - go-mod-server
+
+    volumes:
+      - ./proto:/app/proto:ro
+
+networks:
+  calculator-network:
+    driver: bridge
