@@ -1,7 +1,7 @@
 package subtract;
 
 import io.grpc.stub.StreamObserver;
-import calculator.CalculatorGrpc; // Add this import, adjust the package if needed
+import calculator.CalculatorGrpc;
 import calculator.CalculatorOuterClass.TwoNumbers;
 import calculator.CalculatorOuterClass.Number;
 

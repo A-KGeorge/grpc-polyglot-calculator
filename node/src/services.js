@@ -46,7 +46,6 @@ function callBinary(host, method, a, b, { timeoutMs = 2000 } = {}) {
 
 // Call a binary operation on the specified host
 function callOp(op, a, b, opts) {
-  //   console.log(`Calling ${op} with a=${a}, b=${b} on ${OP_MAP[op].host}`);
   const svc = OP_MAP[op];
   if (!svc) throw new Error(`No service mapping for operator '${op}'`);
   return callBinary(svc.host, svc.method, a, b, opts);

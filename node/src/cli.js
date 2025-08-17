@@ -4,7 +4,6 @@ const { evalAST } = require("./eval");
 
 async function evaluateExpression(expr) {
   const tokens = tokenize(expr);
-  //   console.log(tokens);
   const ast = toAST(tokens);
   return evalAST(ast);
 }
