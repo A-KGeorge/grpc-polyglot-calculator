@@ -305,6 +305,52 @@ graph TD
    Result: 31
    ```
 
+### Interactive Usage with Running Containers
+
+If you want to manually enter expressions while containers are running:
+
+#### Option 1: Access the Node.js Client Container Directly
+
+```bash
+# Enter the running Node.js client container interactively
+docker-compose exec node-client node src/cli.js
+```
+
+#### Option 2: Run Interactive Session
+
+```bash
+# Start containers in detached mode
+docker-compose up -d
+
+# Then access the interactive client
+docker-compose exec node-client node src/cli.js
+
+# Enter expressions manually:
+# > 2 + 3 * 4
+# Result: 14
+# > (10 - 6) / 2 + 3^2
+# Result: 11
+```
+
+#### Option 3: One-off Expression Evaluation
+
+```bash
+# Evaluate a single expression without entering interactive mode
+echo "5^2 + 3*4" | docker-compose exec -T node-client node src/cli.js
+```
+
+### Automated Testing
+
+Run the comprehensive test suite:
+
+```bash
+# Make sure containers are running first
+docker-compose up -d
+
+# Run all test cases
+node test.js
+```
+
 ### Individual Service Development
 
 #### Python Add Server
