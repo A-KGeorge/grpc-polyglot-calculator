@@ -563,3 +563,10 @@ Thumbs.db
 *.tgz
 *.rar
 *.7z
+
+# Allow the Elixir app's lib directory to be tracked. A generic "lib" entry
+# above ignores any folder named `lib` at any level, which caused
+# `elixir/lib/` to be skipped. Re-include it explicitly so those sources
+# are committed.
+!elixir/lib/
+!elixir/lib/**
